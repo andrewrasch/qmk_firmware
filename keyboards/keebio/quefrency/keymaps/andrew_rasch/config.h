@@ -20,5 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
+#define UNICODE_KEY_WINC KC_RGUI
 
 // #define USE_I2C
