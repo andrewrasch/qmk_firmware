@@ -14,6 +14,7 @@ extern keymap_config_t keymap_config;
 #define A_UMLT XP(A_UMLT_L, A_UMLT_C)
 #define U_UMLT XP(U_UMLT_L, U_UMLT_C)
 #define ESZETT XP(ESZETT_L, ESZETT_C)
+#define FN1BSP LT(FN1, KC_BSPC)
 
 enum unicode_names {
   O_UMLT_L,
@@ -51,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F3,   KC_F4,   KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_DEL, \
     KC_F5,   KC_F6,   MO(FN1),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT, KC_ENT,  KC_HOME, \
     KC_F7,   KC_F8,   KC_LSPO,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSPC, KC_UP,   KC_END, \
-    KC_F9,   KC_F10,  KC_LCTL,  KC_LGUI, KC_LALT, MO(FN1), KC_SPC,           KC_BSPC, MO(FN1), KC_RALT, KC_RGUI,KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    KC_F9,   KC_F10,  KC_LCTL,  KC_LGUI, KC_LALT, MO(FN1), KC_SPC,           FN1BSP,  MO(FN1), KC_RALT, KC_RGUI,KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
   ),
   [FN2] = LAYOUT_65_with_macro(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
@@ -66,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, KC_CAPS, _______, _______, _______, _______, _______, _______, U_UMLT , KC_UP,   O_UMLT , _______, _______, _______, _______, _______, \
     _______, _______, _______, A_UMLT , ESZETT , _______, _______, KC_H   , _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_PGUP, \
     _______, _______, _______, _______, _______, _______, _______, KC_M   , _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, KC_PGDN, \
-    _______, UC_MOD , KC_MEH , _______, KC_HYPR, _______, _______,          _______, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT
+    _______, UC_MOD , _______, KC_MEH,  KC_HYPR, _______, _______,          KC_DEL,  _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT
   )
 
 };
