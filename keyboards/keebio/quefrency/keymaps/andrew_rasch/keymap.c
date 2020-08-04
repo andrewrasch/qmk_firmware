@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, KC_CAPS, _______, _______, _______, _______, _______, _______, U_UMLT , KC_UP,   O_UMLT , _______, _______, _______, _______, _______, \
     _______, _______, _______, A_UMLT , ESZETT , _______, _______, KC_H   , _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_PGUP, \
     _______, _______, _______, _______, _______, _______, _______, KC_M   , _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, KC_PGDN, \
-    _______, UC_MOD , _______, KC_MEH,  KC_HYPR, _______, _______,          KC_DEL,  _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT
+    RESET  , UC_MOD , _______, KC_MEH,  KC_HYPR, _______, _______,          KC_DEL,  _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT
   )
 
 };
@@ -75,3 +75,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void matrix_init_user() {
 	set_unicode_input_mode(UC_WINC);
 };
+
+void encoder_update_user(uint8_t index, bool clockwise) {
+    if (index == 0) {
+        if (clockwise) {
+            tap_code(KC_PGDN);
+        } else {
+            tap_code(KC_PGUP);
+        }
+    }
+    else if (index == 1) {
+        if (clockwise) {
+            tap_code(KC_VOLU);
+        } else {
+            tap_code(KC_VOLD);
+        }
+    }
+}
