@@ -52,10 +52,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F3,   KC_F4,   KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_DEL, \
     KC_F5,   KC_F6,   MO(FN1),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT, KC_ENT,  KC_HOME, \
     KC_F7,   KC_F8,   KC_LSPO,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSPC, KC_UP,   KC_END, \
-    KC_F9,   KC_F10,  KC_LCTL,  KC_LGUI, KC_LALT, MO(FN1), KC_SPC,           FN1BSP,  MO(FN1), KC_RALT, KC_RGUI,KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    KC_F9,   KC_F10,  KC_LCTL,  KC_LGUI, KC_LALT, MO(FN1), KC_SPC,           _______, FN1BSP,  KC_RALT, KC_RGUI,KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
   ),
   [FN2] = LAYOUT_65_with_macro(
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    KC_BTN1, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_BTN2, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, KC_LSFT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_RSFT, _______, _______, \
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FN1] = LAYOUT_65_with_macro(
-    TG(FN2), _______, KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,  KC_PSCR, _______, \
+    _______, TG(FN2), KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,  KC_PSCR, _______, \
     _______, _______, KC_CAPS, _______, _______, _______, _______, _______, _______, U_UMLT , KC_UP,   O_UMLT , _______, _______, _______, _______, _______, \
     _______, _______, _______, A_UMLT , ESZETT , _______, _______, KC_H   , _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_PGUP, \
     _______, _______, _______, _______, _______, _______, _______, KC_M   , _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, KC_PGDN, \
@@ -78,17 +78,20 @@ void matrix_init_user() {
 
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_PGDN);
-        } else {
-            tap_code(KC_PGUP);
+        switch(biton32(layer_state)) {
+            case FN2:
+                clockwise ? tap_code16(LALT(KC_TAB)) : tap_code16(LALT(KC_TAB));
+                break;
+            default:
+                clockwise ? tap_code16(C(S(KC_Z))) :  tap_code16(C(KC_Z));
+                break;
         }
     }
     else if (index == 1) {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
+        switch(biton32(layer_state)){
+            default:
+                clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
+                break;
         }
     }
 }
