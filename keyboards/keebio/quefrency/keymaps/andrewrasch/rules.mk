@@ -14,9 +14,14 @@ UNICODE_ENABLE = no         # Unicode
 UNICODEMAP_ENABLE = yes     # Unicode map
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 RGBLIGHT_ENABLE = yes       # Enable WS2812 RGB underlight.
+ENCODER_ENABLE  = yes       # ENables the use of one or more encoders
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 
 SPLIT_KEYBOARD = yes
 
 DEFAULT_FOLDER = keebio/quefrency/rev2
+
+ifeq ($(strip $(ENCODER_ENABLE)), yes)
+	SRC += encoder_utils.c
+endif
