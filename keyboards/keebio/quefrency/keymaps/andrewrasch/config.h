@@ -22,7 +22,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 #define UNICODE_KEY_WINC KC_RGUI
 #define UNICODE_SELECTED_MODES UC_LNX, UC_WINC
-
-#ifdef ENCODER_ENABLE
-#    define ENCODER_DIRECTION_FLIP
-#endif

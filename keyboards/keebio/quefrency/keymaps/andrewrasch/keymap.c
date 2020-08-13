@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [FN1] = LAYOUT_65_with_macro(
     _______, TG(NOOB), KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_PSCR, KC_PSCR, _______, \
-    _______, _______, KC_CAPS, _______, _______, _______, _______, _______, _______, U_UMLT , KC_UP,   O_UMLT , _______, _______, _______, KC_INS , _______, \
+    _______, _______, KC_CAPS, _______, _______, _______, _______, _______, _______, U_UMLT , KC_UP,   O_UMLT , _______, _______, _______, _______ , KC_INS, \
     _______, _______, _______, A_UMLT , ESZETT , _______, _______, KC_H   , _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_PGUP, \
     _______, _______, _______, _______, _______, _______, _______, KC_M   , _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, KC_PGDN, \
     _______, _______, _______, KC_MEH,  KC_HYPR, _______, _______,          _______, KC_DEL , _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT
@@ -91,17 +91,24 @@ void matrix_init_user() {
 #endif
 };
 
+void keyboard_post_init_user(void) {
+#ifdef ENCODER_ENABLE
+    encoder_rgb_init();
+#endif
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    bool reverse = get_mods() & MOD_MASK_SHIFT;
     switch (keycode) {
 #ifdef ENCODER_ENABLE
         case ENC_L:
             if (record->event.pressed) {
-                cycle_encoder_mode(true, false);
+                cycle_encoder_mode(true, reverse);
             }
             break;
         case ENC_R:
             if (record->event.pressed) {
-                cycle_encoder_mode(false, false);
+                cycle_encoder_mode(false, reverse);
             }
             break;
 #endif

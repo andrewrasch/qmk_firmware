@@ -1,8 +1,36 @@
 #include "encoder_utils.h"
+#include "rgb_utils.h"
 
 void encoder_utils_init(void) {
     encoder_left_mode  = ENC_MODE_HISTORY_SCRUB;
     encoder_right_mode = ENC_MODE_VOLUME;
+}
+
+void set_encoder_color(bool left, encoder_mode_t mode) {
+    switch (mode) {
+        case ENC_MODE_VOLUME:
+            left ? sethsv_master(HSV_PURPLE) : sethsv_slave(HSV_PURPLE);
+            break;
+        case ENC_MODE_WORD_NAV:
+            left ? sethsv_master(HSV_RED) : sethsv_slave(HSV_RED);
+            break;
+        case ENC_MODE_UP_DOWN:
+            left ? sethsv_master(HSV_GREEN) : sethsv_slave(HSV_GREEN);
+            break;
+        case ENC_MODE_PAGING:
+            left ? sethsv_master(HSV_BLUE) : sethsv_slave(HSV_BLUE);
+            break;
+        case ENC_MODE_HISTORY_SCRUB:
+            left ? sethsv_master(HSV_TEAL) : sethsv_slave(HSV_TEAL);
+            break;
+        default:
+            break;
+    }
+}
+
+void encoder_rgb_init(void) {
+    set_encoder_color(true, encoder_left_mode);
+    set_encoder_color(false, encoder_right_mode);
 }
 
 void set_encoder_mode(bool left, encoder_mode_t mode) {
@@ -11,6 +39,7 @@ void set_encoder_mode(bool left, encoder_mode_t mode) {
     } else {
         encoder_right_mode = mode;
     }
+    set_encoder_color(left, mode);
 }
 
 encoder_mode_t get_encoder_mode(bool left) {
@@ -57,17 +86,17 @@ void encoder_action_history_scrub(uint8_t clockwise) {
 
 void encoder_action_up_down(uint8_t clockwise) {
     if (clockwise) {
-        tap_code(KC_UP);
-    } else {
         tap_code(KC_DOWN);
+    } else {
+        tap_code(KC_UP);
     }
 }
 
 void encoder_action_paging(uint8_t clockwise) {
     if (clockwise) {
-        tap_code(KC_PGUP);
-    } else {
         tap_code(KC_PGDN);
+    } else {
+        tap_code(KC_PGUP);
     }
 }
 

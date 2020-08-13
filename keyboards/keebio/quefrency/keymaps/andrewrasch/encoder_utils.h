@@ -18,6 +18,10 @@ encoder_mode_t encoder_right_mode;
 
 void encoder_utils_init(void);
 
+void set_encoder_color(bool left, encoder_mode_t mode);
+
+void encoder_rgb_init(void);
+
 void set_encoder_mode(bool left, encoder_mode_t mode);
 
 encoder_mode_t get_encoder_mode(bool left);
