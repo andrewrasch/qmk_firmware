@@ -9,10 +9,9 @@ extern keymap_config_t keymap_config;
 enum custom_keycodes {
     ENC_L = SAFE_RANGE,
     ENC_R,
-    TMB_MODE,
 };
 
-enum layers { BASE, NOOB, FN1, FN2 };
+enum layers { BASE, NOOB, FN1, GER, FN2 };
 
 #define O_UMLT XP(O_UMLT_L, O_UMLT_C)
 #define A_UMLT XP(A_UMLT_L, A_UMLT_C)
@@ -56,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F1,   KC_F2,   KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_DEL, \
     KC_F3,   KC_F4,   MO(FN1),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT, KC_ENT,  KC_HOME, \
     KC_F5,   KC_F6,   KC_LSPO,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSPC, KC_UP,   KC_END, \
-    KC_F7,   KC_F8,  KC_LCTL,  KC_LGUI, KC_LALT, MO(FN2), KC_SPC,           _______, FN1BSP,  KC_RALT, KC_RGUI,KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    KC_F7,   KC_F8,   KC_LCTL,  KC_LGUI, KC_LALT, MO(GER), KC_SPC,           _______, KC_BSPC, KC_RALT, KC_RGUI,KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
   ),
   [NOOB] = LAYOUT_65_with_macro(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
@@ -67,11 +66,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FN1] = LAYOUT_65_with_macro(
-    _______, TG(NOOB), KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_PSCR, KC_PSCR, _______, \
-    _______, _______, KC_CAPS, _______, _______, _______, _______, _______, _______, U_UMLT , KC_UP,   O_UMLT , _______, _______, _______, _______ , KC_INS, \
-    _______, _______, _______, A_UMLT , ESZETT , _______, _______, KC_H   , _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_PGUP, \
+    _______, TG(NOOB),KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_PSCR, KC_PSCR, _______, \
+    _______, TG(FN2), KC_CAPS, _______, _______, _______, _______, _______, _______, _______, KC_UP,   _______, _______, _______, _______, _______ , KC_INS, \
+    _______, _______, _______, _______, _______, _______, _______, KC_H   , _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_PGUP, \
     _______, _______, _______, _______, _______, _______, _______, KC_M   , _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, KC_PGDN, \
     _______, _______, _______, KC_MEH,  KC_HYPR, _______, _______,          _______, KC_DEL , _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT
+  ),
+
+  [GER] = LAYOUT_65_with_macro(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, A_UMLT , _______, _______, _______, _______, U_UMLT,  _______, _______, _______, O_UMLT , _______, _______, _______, _______, \
+    _______, _______, _______, _______, ESZETT , _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
   [FN2] = LAYOUT_65_with_macro(
@@ -79,13 +86,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, RGB_TOG, RGB_MOD,RGB_RMOD, RGB_HUI, RGB_VAI, RGB_SAI, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    RESET, UC_MOD, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______
+    RESET,   UC_MOD,  _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______
   )
 
 };
 
 void matrix_init_user() {
-	set_unicode_input_mode(UC_WINC);
 #ifdef ENCODER_ENABLE
     encoder_utils_init();
 #endif

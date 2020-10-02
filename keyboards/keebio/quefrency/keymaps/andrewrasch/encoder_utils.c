@@ -21,7 +21,7 @@ void set_encoder_color(bool left, encoder_mode_t mode) {
             left ? sethsv_master(HSV_BLUE) : sethsv_slave(HSV_BLUE);
             break;
         case ENC_MODE_HISTORY_SCRUB:
-            left ? sethsv_master(HSV_TEAL) : sethsv_slave(HSV_TEAL);
+            left ? sethsv_master(HSV_CYAN) : sethsv_slave(HSV_CYAN);
             break;
         default:
             break;
@@ -62,9 +62,9 @@ void cycle_encoder_mode(bool left, bool reverse) {
 
 void encoder_action_volume(uint8_t clockwise) {
     if (clockwise) {
-        tap_code(KC_VOLU);
-    } else {
         tap_code(KC_VOLD);
+    } else {
+        tap_code(KC_VOLU);
     }
 }
 
