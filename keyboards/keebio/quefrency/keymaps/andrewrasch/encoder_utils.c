@@ -3,7 +3,7 @@
 
 void encoder_utils_init(void) {
     encoder_left_mode  = ENC_MODE_HISTORY_SCRUB;
-    encoder_right_mode = ENC_MODE_VOLUME;
+    encoder_right_mode = ENC_MODE_WORD_NAV;
 }
 
 void set_encoder_color(bool left, encoder_mode_t mode) {
